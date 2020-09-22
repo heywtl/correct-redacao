@@ -1,0 +1,25 @@
+{
+  "name": "correct-redacao",
+  "version": "1.0.0",
+  "description": "TITLE:  Education - 100% Fully Responsive Free HTML5 Bootstrap Template",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heywtl/correct-redacao.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heywtl/correct-redacao/issues"
+  },
+  "homepage": "https://github.com/heywtl/correct-redacao#readme"
+}
