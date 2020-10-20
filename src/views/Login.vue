@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 md4>
                 <v-card class="elevation-12">
                     <v-toolbar dark color="primary">
-                        <v-toolbar-title>Join Form</v-toolbar-title>
+                        <v-toolbar-title>Login</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
                         <v-form ref="form" v-model="valid" lazy-validation>
@@ -13,9 +13,8 @@
                                 name="email"
                                 label="Email"
                                 type="email"
-                                v-model="email"
+                                v-model.lazy="email"
                                 :rules="emailRules"
-                                data-cy="joinEmailField"
                                 required
                             >
                             </v-text-field>
@@ -25,9 +24,8 @@
                                 label="Password"
                                 type="password"
                                 required
-                                v-model="password"
+                                v-model.lazy="password"
                                 :rules="passwordRules"
-                                data-cy="joinPasswordField"
                             >
                             </v-text-field>
                         </v-form>
@@ -39,7 +37,7 @@
                             :disabled="!valid"
                             @click="submit"
                             data-cy="joinSubmitBtn"
-                            >Join</v-btn
+                            >Entrar</v-btn
                         >
                     </v-card-actions>
                 </v-card>
@@ -49,6 +47,8 @@
 </template>
 
 <script>
+const firebase = require('../firebase/index')
+
 export default {
     name: 'Join',
     data() {
@@ -57,18 +57,21 @@ export default {
             email: '',
             password: '',
             emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+/.test(v) || 'E-mail must be valid'
+                v => !!v || 'Esse campo é necessário',
+                v => /.+@.+/.test(v) || 'Este E-mail não é válido'
             ],
             passwordRules: [
-                v => !!v || 'Password is required',
-                v => v.length >= 6 || 'Password must be greater than 6 characters'
+                v => !!v || 'Esse campo é necessário',
+                v => v.length >= 6 || 'Senhas devem ter mais de 6 caractéres'
             ]
         };
     },
     methods: {
-        submit() {
-            console.log('Login: ', new { email, password })
+        submit() { //(Heitor) TODO: colocar no Vuex
+            firebase.auth.signInWithEmailAndPassword(this.email, this.password)
+                .then(response => { console.log(response) })
+                .catch(e => { console.log(e) })
+                .finally(() => {})
         }
     }
 };
