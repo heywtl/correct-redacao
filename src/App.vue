@@ -19,7 +19,8 @@
             <v-btn icon
               v-bind="attrs"
               v-on="on">
-              <v-icon>mdi-face</v-icon>
+              <v-icon v-if="isAuthorized">mdi-face</v-icon>
+              <v-icon v-else>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
 
