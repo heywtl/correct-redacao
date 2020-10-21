@@ -69,7 +69,10 @@ export default {
         })
         .catch(e => { console.log(e) })
         .finally(() => {})
-    }
+    },
+    signUserOut({ commit }: any) {
+      commit('clearUser')
+  }
   },
   getters: {
     isAuthorized(state: any) {

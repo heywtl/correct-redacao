@@ -24,20 +24,17 @@
           </template>
 
           <v-list>
-            <v-list-item :to="appBarFirstOption">
+            <v-list-item :to="option.route"
+              v-for="(option, index) in menuOptions"
+              :key="'option ' + index">
               <v-list-item-title>
-                <template v-if="!isAuthorized">
-                  <v-icon>mdi-login</v-icon> Login</template>
-                <template v-else>
-                  <v-icon>mdi-face-profile</v-icon> Perfil</template>
+                <v-icon>{{ option.icon }}</v-icon> {{ option.name }}
               </v-list-item-title>
             </v-list-item>
-            <v-list-item :to="appBarSecondOption">
+            <v-list-item v-if="isAuthorized"
+              v-on:click="logout">
               <v-list-item-title>
-                <template v-if="!isAuthorized">
-                  <v-icon>mdi-account-plus</v-icon> Cadastro</template>
-                <template v-else>
-                  <v-icon>mdi-send</v-icon> Submeter</template>
+                <v-icon>mdi-exit-to-app</v-icon> Sair
               </v-list-item-title>
             </v-list-item>
           </v-list>    
@@ -49,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import {mapGetters} from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'App',
@@ -58,17 +55,25 @@ export default {
       ...mapGetters([
         'isAuthorized'
       ]),
-      appBarFirstOption() {
+      menuOptions() {
         if (!this.isAuthorized)
-          return { name:'Login' }
+          return [
+            { route: 'Login', icon: 'mdi-login', name: 'Login'},
+            { route: 'Cadastro', icon: 'mdi-account-plus', name: 'Cadastro'},
+            ]
         else
-          return { name:'Perfil' }
-      },
-      appBarSecondOption() {
-        if (!this.isAuthorized)
-          return { name:'Cadastro' }
-        else
-          return { name:'Submeter' }
+          return [
+            { route: 'Perfil', icon: 'mdi-face-profile', name: 'Perfil'},
+            { route: 'Submeter', icon: 'mdi-send', name: 'Submeter'},
+            ]
+      }
+    },
+    methods: {
+      ...mapActions([
+        'signUserOut'
+      ]),
+      logout() {
+        this.signUserOut()
       }
     }
 };
