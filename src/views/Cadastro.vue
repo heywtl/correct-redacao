@@ -16,18 +16,24 @@
                                 v-model.lazy="email"
                                 :rules="emailRules"
                                 required
-                            >
-                            </v-text-field>
+                            ></v-text-field>
                             <v-text-field
                                 prepend-icon="mdi-lock"
                                 name="password"
-                                label="Password"
+                                label="Senha"
                                 type="password"
                                 v-model.lazy="password"
                                 :rules="passwordRules"
                                 required
-                            >
-                            </v-text-field>
+                            ></v-text-field>
+                            <v-text-field
+                                prepend-icon="mdi-lock"
+                                name="confirmPassword"
+                                label="Confirme sua senha"
+                                type="password"
+                                :rules="confirmPasswordRules"
+                                required
+                            ></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
@@ -47,7 +53,7 @@
 </template>
 
 <script>
-const firebase = require('../firebase/index')
+import {mapActions} from 'vuex'
 
 export default {
     name: 'Signin',
@@ -63,15 +69,25 @@ export default {
             passwordRules: [
                 v => !!v || 'Esse campo é necessário',
                 v => v.length >= 6 || 'Senhas devem ter mais de 6 caractéres'
+            ],
+            confirmPasswordRules: [
+                v => !!v || 'Esse campo é necessário',
+                v => this.password == v || 'As senhas não conferem'
             ]
         };
     },
     methods: {
-        submit() { //(Heitor) TODO: colocar no Vuex
-            firebase.auth.createUserWithEmailAndPassword(this.email, this.password)
-                .then(response => { console.log(response) })
-                .catch(e => { console.log(e) })
-                .finally(() => {})
+        ...mapActions([
+            'signUpUser'
+        ]),
+        submit() {
+            let payload = {
+                email: this.email,
+                password: this.password
+            }
+            this.signUpUser(payload).then(() => {
+                this.$router.push({ name: 'Home' })
+            })
         }
     }
 };

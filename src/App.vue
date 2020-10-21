@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background: #bfbfbf" id="app">
+  <v-app id="app">
     <v-main transition="slide-x-transition">
       <v-toolbar dark dense
         color="primary">
@@ -49,14 +49,15 @@
 </template>
 
 <script lang="ts">
+import {mapGetters} from 'vuex'
 
 export default {
     name: 'App',
     components: {},
     computed: {
-      isAuthorized() { // (Heitor)TODO: Colocar isso no vuex!!
-        return false
-      },
+      ...mapGetters([
+        'isAuthorized'
+      ]),
       appBarFirstOption() {
         if (!this.isAuthorized)
           return { name:'Login' }

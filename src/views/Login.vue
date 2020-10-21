@@ -31,6 +31,22 @@
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
+                        <v-btn 
+                            @click="googleLogin"
+                            class="mx-2"
+                            dark
+                            small
+                            color="red">
+                            <b>GOOGLE</b></v-btn
+                        >
+                        <!-- <v-btn 
+                            @click="facebookLogin"
+                            class="mx-2"
+                            dark
+                            small
+                            color="blue">
+                            <b>FACEBOOK</b></v-btn
+                        > -->
                         <v-spacer></v-spacer>
                         <v-btn
                             color="primary"
@@ -47,7 +63,7 @@
 </template>
 
 <script>
-const firebase = require('../firebase/index')
+import {mapActions} from 'vuex'
 
 export default {
     name: 'Join',
@@ -63,15 +79,39 @@ export default {
             passwordRules: [
                 v => !!v || 'Esse campo é necessário',
                 v => v.length >= 6 || 'Senhas devem ter mais de 6 caractéres'
-            ]
+            ],
+            loading: {
+                signInButton: false,
+            }
         };
     },
     methods: {
-        submit() { //(Heitor) TODO: colocar no Vuex
-            firebase.auth.signInWithEmailAndPassword(this.email, this.password)
-                .then(response => { console.log(response) })
-                .catch(e => { console.log(e) })
-                .finally(() => {})
+        ...mapActions([
+            'signInUser',
+            'googleSignIn',
+            'facebookSignIn'
+        ]),
+        submit() {
+            this.loading.signInButton = true
+            let payload = {
+                email: this.email,
+                password: this.password
+            }
+            this.signInUser(payload).then(() => {
+                this.$router.push({ name: 'Home' })
+            })
+        },
+        googleLogin() {
+            this.loading.signInButton = true
+            this.googleSignIn().then(() => {
+                this.$router.push({ name: 'Home' })
+            })
+        },
+        facebookLogin() {
+            this.loading.signInButton = true
+            this.facebookSignIn().then(() => {
+                this.$router.push({ name: 'Home' })
+            })
         }
     }
 };
