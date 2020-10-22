@@ -1,4 +1,5 @@
 import firebase from '../../firebase/index'
+import router from '../../router'
 
 export default {
   state: {
@@ -72,6 +73,7 @@ export default {
     },
     signUserOut({ commit }: any) {
       commit('clearUser')
+      router.push({ name: 'Home' })
   }
   },
   getters: {

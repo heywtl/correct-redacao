@@ -25,7 +25,7 @@
           </template>
 
           <v-list>
-            <v-list-item :to="option.route"
+            <v-list-item :to="{ name: option.route }"
               v-for="(option, index) in menuOptions"
               :key="'option ' + index">
               <v-list-item-title>
