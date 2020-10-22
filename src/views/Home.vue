@@ -1,5 +1,4 @@
 <template>
-  <v-container>
     <v-carousel
       cycle
       height="400"
@@ -25,7 +24,6 @@
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-  </v-container>
 </template>
 
 <script>
@@ -33,24 +31,24 @@
 
 export default {
   name: 'Home',
-    data() {
-        return {
-          colors: [
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-        ],
-        slides: [
-          'First',
-          'Second',
-          'Third',
-          'Fourth',
-          'Fifth',
-        ],
-      };
-    },
+  data() {
+      return {
+        colors: [
+        'indigo',
+        'warning',
+        'pink darken-2',
+        'red lighten-1',
+        'deep-purple accent-4',
+      ],
+      slides: [
+        'First',
+        'Second',
+        'Third',
+        'Fourth',
+        'Fifth',
+      ],
+    };
+  },
   components: {
   }
 }

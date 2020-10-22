@@ -63,15 +63,15 @@ export default {
             email: '',
             password: '',
             emailRules: [
-                v => !!v || 'Esse campo é necessário',
+                v => !!v || 'Esse campo é obrigatório',
                 v => /.+@.+/.test(v) || 'Este E-mail não é válido'
             ],
             passwordRules: [
-                v => !!v || 'Esse campo é necessário',
+                v => !!v || 'Esse campo é obrigatório',
                 v => v.length >= 6 || 'Senhas devem ter mais de 6 caractéres'
             ],
             confirmPasswordRules: [
-                v => !!v || 'Esse campo é necessário',
+                v => !!v || 'Você precisa conferir a senha',
                 v => this.password == v || 'As senhas não conferem'
             ]
         };
