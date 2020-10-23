@@ -4,77 +4,88 @@ import router from '../../router'
 export default {
   state: {
     isAuthorized: false,
-    user: null
+    user: null,
+    profile: null
   },
   mutations: {
     setUser(state: any, user: any) {
       state.user = user
       state.isAuthorized = true
     },
+    setProfile(state: any, profile: any) {
+      state.profile = profile
+    },
     clearUser(state: any) {
       state.user = null
+      state.profile = null
       state.isAuthorized = false
     }
   },
   actions: {
-    signUpUser({commit}: any, payload: any) {
+    signUpUser({commit, dispatch}: any, payload: any) {
       firebase.auth.createUserWithEmailAndPassword(payload.email, payload.password)
-        .then((response): any => {
+        .then((auth) => {
           let newUser = {
-            // @ts-ignore: Object is possibly 'null'.
-            id: response.user.uid,
+            id: auth.user?.uid,
+            email: auth.user?.email,
             fbKeys: {}
           }
           commit('setUser', newUser)
-          
         })
         .catch((e) => { console.log(e) })
-        .finally(() => {})
+        .finally(() => {
+          dispatch('getProfile', payload, { root:true })
+        })
     },
-    signInUser({ commit }: any, payload: any) {
-      commit('clearError')
+    signInUser({ commit, dispatch }: any, payload: any) {
       firebase.auth.signInWithEmailAndPassword(payload.email, payload.password)
-        .then((response) => {
+        .then((auth) => {
+          console.log(auth)
           let newUser = {
-            // @ts-ignore: Object is possibly 'null'.
-            id: response.user.uid,
+            id: auth.user?.uid,
+            email: auth.user?.email,
             fbKeys: {}
           }
           commit('setUser', newUser)
         })
         .catch(e => { console.log(e) })
-        .finally(() => {})
+        .finally(() => {
+          dispatch('getProfile', payload, { root:true })
+        })
     },
-    googleSignIn({ commit }: any) {
+    googleSignIn({ commit, dispatch }: any) {
         firebase.auth.signInWithPopup(firebase.google)
-        .then((response) => {
+        .then((auth) => {
           let newUser = {
-            // @ts-ignore: Object is possibly 'null'.
-            id: response.user.uid,
+            id: auth.user?.uid,
+            email: auth.user?.email,
             fbKeys: {}
           }
           commit('setUser', newUser)
         })
         .catch(e => { console.log(e) })
-        .finally(() => {})
+        .finally(() => {
+        })
     },
-    facebookSignIn({ commit }: any) {
+    facebookSignIn({ commit, dispatch }: any) {
+      let vm = this
         firebase.auth.signInWithPopup(firebase.facebook)
-        .then((response) => {
+        .then((auth) => {
           let newUser = {
-            // @ts-ignore: Object is possibly 'null'.
-            id: response.user.uid,
+            id: auth.user?.uid,
+            email: auth.user?.email,
             fbKeys: {}
           }
           commit('setUser', newUser)
         })
         .catch(e => { console.log(e) })
-        .finally(() => {})
+        .finally(() => {
+        })
     },
     signUserOut({ commit }: any) {
       commit('clearUser')
       router.push({ name: 'Home' })
-  }
+    }
   },
   getters: {
     isAuthorized(state: any) {
@@ -82,6 +93,9 @@ export default {
     },
     getUser(state: any) {
       return state.user
+    },
+    getProfile(state: any) {
+      return state.profile
     }
   }
 }
