@@ -42,6 +42,20 @@
         </v-menu>
       </v-toolbar>
       <router-view></router-view>
+    <v-card height="150">
+    <v-footer
+      absolute
+      padless
+      class="font-weight-medium"
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>Correct</strong>
+      </v-col>
+    </v-footer>
+  </v-card>
     </v-main>
   </v-app>
 </template>
