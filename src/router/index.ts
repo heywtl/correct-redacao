@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Cadastro from '../views/Cadastro.vue'
 import Login from '../views/Login.vue'
 import About from '../views/About.vue'
+import Perfil from '../views/Perfil.vue'
 import Submeter from '../views/Submeter.vue'
 import AuthGuard from './auth-guard'
 
@@ -39,7 +40,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/perfil',
     name: 'Perfil',
-    component: Submeter, //TODO: trocar pro certo
+    component: Perfil,
     beforeEnter: AuthGuard
   },
 ]

@@ -1,5 +1,4 @@
 import firebase from '../../firebase/index'
-import router from '../../router'
 
 export default {
   state: {
@@ -14,14 +13,14 @@ export default {
     }
   },
   actions: {
-    getProfile({ commit }: any, payload: any) {
+    fetchProfile({ commit }: any, payload: any) {
       firebase.db.collection('perfil').where('email', '==', payload.email)
         .get().then((profile) => {
           commit('setProfile')
         })
         .catch(e => { console.log(e) })
     },
-    createProfile({ commit }: any, payload: any){
+    createProfile({ commit }: any, payload: any) {
       let addProfile = {
         email: payload.email,
         nome: '',
@@ -43,8 +42,12 @@ export default {
           }
           commit('setProfile', newProfile)
         })
-        .catch((e) => { console.log(e) })
+      .catch((e) => { console.log(e) })
     }
   },
-  getters: {}
+  getters: {
+    getProfile(state: any) {
+      return state.profile
+    }
+  }
 }

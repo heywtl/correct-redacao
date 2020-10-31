@@ -4,16 +4,12 @@ import router from '../../router'
 export default {
   state: {
     isAuthorized: false,
-    user: null,
-    profile: null
+    user: null
   },
   mutations: {
     setUser(state: any, user: any) {
       state.user = user
       state.isAuthorized = true
-    },
-    setProfile(state: any, profile: any) {
-      state.profile = profile
     },
     clearUser(state: any) {
       state.user = null
@@ -34,7 +30,7 @@ export default {
         })
         .catch((e) => { console.log(e) })
         .finally(() => {
-          dispatch('getProfile', payload, { root:true })
+          dispatch('fetchProfile', payload, { root: true })
         })
     },
     signInUser({ commit, dispatch }: any, payload: any) {
@@ -50,7 +46,7 @@ export default {
         })
         .catch(e => { console.log(e) })
         .finally(() => {
-          dispatch('getProfile', payload, { root:true })
+          dispatch('fetchProfile', payload, { root: true })
         })
     },
     googleSignIn({ commit, dispatch }: any) {
@@ -93,9 +89,6 @@ export default {
     },
     getUser(state: any) {
       return state.user
-    },
-    getProfile(state: any) {
-      return state.profile
     }
   }
 }

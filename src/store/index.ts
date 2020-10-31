@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 
 import shared from './shared'
 import user from './user'
+import profile from './profile'
 
 
 Vue.use(Vuex)
@@ -11,6 +12,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     shared,
-    user
+    user,
+    profile
   }
 })

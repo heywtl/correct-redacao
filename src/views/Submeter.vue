@@ -42,9 +42,9 @@
                         >
                         </v-textarea>
                         <v-btn
-                          :color="buttonColor"
+                          :color="file != null ? 'green' : 'red'"
                           class="text-none"
-                          round
+                          rounded
                           depressed
                           :disabled="disableUpload"
                           :loading="isSelecting"
@@ -53,7 +53,7 @@
                           <v-icon left>
                             mdi-upload
                           </v-icon>
-                          {{ buttonText }}
+                          {{ file != null ? this.file.name : '...' }}
                         </v-btn>
                         <input
                           ref="uploader"
@@ -102,12 +102,6 @@ export default {
     }
   },
   computed: {
-    buttonColor() {
-      return this.file != null ? 'green' : 'red'
-    },
-    buttonText() {
-      return this.file != null ? this.file.name : '...'
-    },
     disableUpload() {
       return this.essay != ''
     },
