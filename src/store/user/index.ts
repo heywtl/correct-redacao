@@ -49,7 +49,7 @@ export default {
           dispatch('fetchProfile', payload, { root: true })
         })
     },
-    googleSignIn({ commit, dispatch }: any) {
+    googleSignIn({ commit }: any) {
         firebase.auth.signInWithPopup(firebase.google)
         .then((auth) => {
           let newUser = {
@@ -61,21 +61,7 @@ export default {
         })
         .catch(e => { console.log(e) })
         .finally(() => {
-        })
-    },
-    facebookSignIn({ commit, dispatch }: any) {
-      let vm = this
-        firebase.auth.signInWithPopup(firebase.facebook)
-        .then((auth) => {
-          let newUser = {
-            id: auth.user?.uid,
-            email: auth.user?.email,
-            fbKeys: {}
-          }
-          commit('setUser', newUser)
-        })
-        .catch(e => { console.log(e) })
-        .finally(() => {
+          router.push({ name: 'Home' })
         })
     },
     signUserOut({ commit }: any) {

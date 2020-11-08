@@ -68,7 +68,8 @@ export default {
     components: {},
     computed: {
       ...mapGetters([
-        'isAuthorized'
+        'isAuthorized',
+        'isStudant'
       ]),
       menuOptions() {
         if (!this.isAuthorized)
@@ -76,11 +77,15 @@ export default {
             { route: 'Login', icon: 'mdi-login', name: 'Login'},
             { route: 'Cadastro', icon: 'mdi-account-plus', name: 'Cadastro'},
             ]
+        else if (!this.isStudant)
+          return [
+            { route: 'Perfil', icon: 'mdi-face-profile', name: 'Perfil'},
+          ]
         else
           return [
             { route: 'Perfil', icon: 'mdi-face-profile', name: 'Perfil'},
             { route: 'Submeter', icon: 'mdi-send', name: 'Submeter'},
-            ]
+          ]
       }
     },
     methods: {

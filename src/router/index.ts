@@ -2,10 +2,12 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Cadastro from '../views/Cadastro.vue'
+import CadastroPerfil from '../views/CadastroPerfil.vue'
 import Login from '../views/Login.vue'
 import About from '../views/About.vue'
 import Perfil from '../views/Perfil.vue'
 import Submeter from '../views/Submeter.vue'
+import AuthProfileGuard from './auth-profile-guard'
 import AuthGuard from './auth-guard'
 
 Vue.use(VueRouter)
@@ -27,21 +29,22 @@ const routes: Array<RouteConfig> = [
     component: Login
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/cadastro-perfil',
+    name: 'CadastroPerfil',
+    component: CadastroPerfil,
+    beforeEnter: AuthGuard
   },
   {
     path: '/submeter-redacao',
     name: 'Submeter',
     component: Submeter,
-    beforeEnter: AuthGuard
+    beforeEnter: AuthProfileGuard
   },
   {
     path: '/perfil',
     name: 'Perfil',
     component: Perfil,
-    beforeEnter: AuthGuard
+    beforeEnter: AuthProfileGuard
   },
 ]
 

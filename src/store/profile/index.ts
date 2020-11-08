@@ -16,31 +16,19 @@ export default {
     fetchProfile({ commit }: any, payload: any) {
       firebase.db.collection('perfil').where('email', '==', payload.email)
         .get().then((profile) => {
-          commit('setProfile')
+          let perfis = profile.docs.map((x) => {
+            return { 
+              ...x.data()
+            }
+          })
+          commit('setProfile', perfis[0])
         })
         .catch(e => { console.log(e) })
     },
-    createProfile({ commit }: any, payload: any) {
-      let addProfile = {
-        email: payload.email,
-        nome: '',
-        sobrenome: '',
-        aniversario: '',
-        biografia: '',
-        entrada: Date.now()
-      }
-      firebase.db.collection('perfil').add(addProfile)
+    createProfile({ commit, dispatch }: any, payload: any) {
+      firebase.db.collection('perfil').add(payload)
       .then((profile) => {
-          let newProfile = {
-            id: profile?.id,
-            email: payload.email,
-            nome: '',
-            sobrenome: '',
-            aniversario: '',
-            biografia: '',
-            entrada: Date.now()
-          }
-          commit('setProfile', newProfile)
+          dispatch('fetchProfile', payload)
         })
       .catch((e) => { console.log(e) })
     }
@@ -48,6 +36,9 @@ export default {
   getters: {
     getProfile(state: any) {
       return state.profile
+    },
+    isStudant(state: any) {
+      return (state.profile && state.profile.permissao == 'Estudante')
     }
   }
 }

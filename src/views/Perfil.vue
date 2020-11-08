@@ -8,7 +8,7 @@
         {{ getUser.email }}
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="userType == 'aluno'">
       <v-col cols="6">
         <v-layout class="d-flex">
           <v-card
@@ -87,6 +87,8 @@
         </v-list>
       </v-col>
     </v-row>
+    <v-row v-else-if="userType == 'professor'"></v-row>
+    <v-row v-else-if="userType == 'administrador'"></v-row>
   </v-container>
 </template>
 
@@ -95,7 +97,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      redacoes: []
+      redacoes: [],
+      
     }
   },
   methods: {

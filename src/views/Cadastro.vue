@@ -56,7 +56,7 @@
 import {mapActions} from 'vuex'
 
 export default {
-    name: 'Signin',
+    name: 'Cadastro',
     data() {
         return {
             valid: false,

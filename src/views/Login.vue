@@ -31,14 +31,14 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn 
+            <!-- <v-btn 
               @click="googleLogin"
               class="mx-2"
               dark
               small
               color="red">
               <b>GOOGLE</b></v-btn
-            >
+            > -->
             <!-- <v-btn 
                 @click="facebookLogin"
                 class="mx-2"
@@ -88,8 +88,7 @@ export default {
     methods: {
         ...mapActions([
             'signInUser',
-            'googleSignIn',
-            'facebookSignIn'
+            'googleSignIn'
         ]),
         submit() {
             this.loading.signInButton = true
@@ -103,15 +102,7 @@ export default {
         },
         googleLogin() {
             this.loading.signInButton = true
-            this.googleSignIn().then(() => {
-                this.$router.push({ name: 'Home' })
-            })
-        },
-        facebookLogin() {
-            this.loading.signInButton = true
-            this.facebookSignIn().then(() => {
-                this.$router.push({ name: 'Home' })
-            })
+            this.googleSignIn()
         }
     }
 };
