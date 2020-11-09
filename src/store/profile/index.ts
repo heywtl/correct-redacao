@@ -37,7 +37,7 @@ export default {
     getProfile(state: any) {
       return state.profile
     },
-    isStudant(state: any) {
+    isStudent(state: any) {
       return (state.profile && state.profile.permissao == 'Estudante')
     }
   }

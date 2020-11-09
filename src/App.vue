@@ -69,7 +69,7 @@ export default {
     computed: {
       ...mapGetters([
         'isAuthorized',
-        'isStudant'
+        'isStudent'
       ]),
       menuOptions() {
         if (!this.isAuthorized)
@@ -77,7 +77,7 @@ export default {
             { route: 'Login', icon: 'mdi-login', name: 'Login'},
             { route: 'Cadastro', icon: 'mdi-account-plus', name: 'Cadastro'},
             ]
-        else if (!this.isStudant)
+        else if (!this.isStudent)
           return [
             { route: 'Perfil', icon: 'mdi-face-profile', name: 'Perfil'},
           ]

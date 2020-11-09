@@ -9,6 +9,7 @@ import Perfil from '../views/Perfil.vue'
 import Submeter from '../views/Submeter.vue'
 import AuthProfileGuard from './auth-profile-guard'
 import AuthGuard from './auth-guard'
+import Correcao from '../views/Correcao.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,11 @@ const routes: Array<RouteConfig> = [
     component: Perfil,
     beforeEnter: AuthProfileGuard
   },
+  {
+    path: '/corrigir',
+    name: 'Correção',
+    component: Correcao
+  }
 ]
 
 const router = new VueRouter({
