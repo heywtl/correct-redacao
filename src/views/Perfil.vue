@@ -2,11 +2,11 @@
   <v-container>
     <v-row align="center">
       <v-col class="text-h4" align-self="center">
-        Olá, seja bem vindo!
+        Olá, seja bem vindo
         {{ getUser.email }}
       </v-col>
     </v-row>
-    <v-row v-if="userType == 'aluno'">
+    <v-row v-if= isStudent>
       <v-col cols="6">
         <v-layout class="d-flex">
           <v-card
@@ -15,7 +15,7 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 12
+              <v-icon color="green">mdi-file-send-outline</v-icon> 12
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions> Redações enviadas </v-card-actions>
@@ -26,7 +26,7 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 710
+              <v-icon color="green">mdi-robot</v-icon> 710
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions> Média IA </v-card-actions>
@@ -37,7 +37,7 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 700
+              <v-icon color="green">mdi-human-greeting</v-icon> 700
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions> Média corretor </v-card-actions>
@@ -59,7 +59,7 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 11
+              <v-icon color="green">mdi-file-check-outline</v-icon> 11
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions> Redações Corrigidas </v-card-actions>
@@ -70,10 +70,21 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 1
+              <v-icon color="green">mdi-file-clock-outline</v-icon> 1
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions> Correções em aberto </v-card-actions>
+          </v-card>
+          <v-card
+            max-width="100px"
+            class="mx-auto font-weight-bold text-center"
+            :key="'stat: ' + index"
+          >
+            <v-card-text class="font-weight-bold text-h5">
+              <v-icon color="green">mdi-trophy-variant-outline</v-icon> 900
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions> Maior nota </v-card-actions>
           </v-card>
         </v-layout>
       </v-col>
@@ -105,7 +116,7 @@
         </v-list>
       </v-col>
     </v-row>
-    <v-row v-else-if="userType == 'professor'">
+    <v-row v-else-if = !isStudent>
       <v-col cols="6">
         <v-layout class="d-flex">
           <v-card
@@ -114,7 +125,7 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 12
+              <v-icon color="green">mdi-file-check-outline</v-icon> 4
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions> Redações Corrigidas </v-card-actions>
@@ -125,10 +136,10 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 12
+              <v-icon color="green">mdi-scale-balance</v-icon> 0
             </v-card-text>
             <v-divider></v-divider>
-            <v-card-actions> Redações Corrigidas </v-card-actions>
+            <v-card-actions> Recursos recebidos </v-card-actions>
           </v-card>
           <v-card
             max-width="100px"
@@ -136,21 +147,10 @@
             :key="'stat: ' + index"
           >
             <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 12
+              <v-icon color="green">mdi-file-clock-outline</v-icon> 2
             </v-card-text>
             <v-divider></v-divider>
-            <v-card-actions> Redações Corrigidas </v-card-actions>
-          </v-card>
-          <v-card
-            max-width="100px"
-            class="mx-auto font-weight-bold text-center"
-            :key="'stat: ' + index"
-          >
-            <v-card-text class="font-weight-bold text-h5">
-              <v-icon color="green">mdi-check</v-icon> 12
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions> Redações Corrigidas </v-card-actions>
+            <v-card-actions> Correções em aberto </v-card-actions>
           </v-card>
         </v-layout>
       </v-col>
@@ -196,7 +196,10 @@ export default {
   },
   methods: {},
   computed: {
-    ...mapGetters(["getUser"]),
+    ...mapGetters([
+      'getUser',
+      'isStudent'
+      ]),
   },
   beforeMount() {
     this.redacoes = [

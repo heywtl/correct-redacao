@@ -26,7 +26,7 @@ export default {
         .catch(e => { console.log(e) })
     },
     createProfile({ commit, dispatch }: any, payload: any) {
-      firebase.db.collection('perfil').add(payload)
+      firebase.db.collection(payload.permissao).doc(payload.email).set(payload)
       .then((profile) => {
           dispatch('fetchProfile', payload)
         })
