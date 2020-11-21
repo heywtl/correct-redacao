@@ -1,4 +1,5 @@
 import firebase from '../../firebase/index'
+import router from '../../router'
 
 export default {
   state: {
@@ -31,6 +32,9 @@ export default {
           dispatch('fetchProfile', payload)
         })
       .catch((e) => { console.log(e) })
+      .finally(() => {
+        router.push({ name: 'Home' })
+      })
     }
   },
   getters: {
