@@ -15,19 +15,13 @@ export default {
   },
   actions: {
     fetchProfile({ commit }: any, payload: any) {
-      firebase.db.collection('perfil').where('email', '==', payload.email)
-        .get().then((profile) => {
-          let perfis = profile.docs.map((x) => {
-            return { 
-              ...x.data()
-            }
+      firebase.db.collection('Users').doc(payload.email).get().then((profile) => {
+          commit('setProfile', profile.data())
           })
-          commit('setProfile', perfis[0])
-        })
-        .catch(e => { console.log(e) })
+        .catch((e: any) => { console.log(e) })
     },
     createProfile({ commit, dispatch }: any, payload: any) {
-      firebase.db.collection(payload.permissao).doc(payload.email).set(payload)
+      firebase.db.collection('Users').doc(payload.email).set(payload)
       .then((profile) => {
           dispatch('fetchProfile', payload)
         })
