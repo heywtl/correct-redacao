@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {  
     return {
@@ -114,13 +114,17 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'postEssay'
+    ]),
     submit() {
       let payload = {
         title: this.title,
         theme: this.theme,
-        essay: this.essay != '' ? this.essay : this.file
+        essay: this.essay != '' ? this.essay : this.file,
+        postDate: new Date().toISOString().substr(0, 16).replace("T", " ")
       }
-      console.log('implementar submissao', payload)
+      this.postEssay(payload)
     },
     onButtonClick() {
       this.isSelecting = true
