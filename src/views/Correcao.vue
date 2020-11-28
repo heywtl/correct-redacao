@@ -61,7 +61,7 @@
                     </button>
                   </div>
                 </editor-menu-bar>
-                <v-col align-self="center"
+                <v-col align-self="center" class="editorConteudo"
                   ><editor-content :editor="editor"
                 /></v-col>
               </v-flex>
@@ -72,6 +72,26 @@
     </v-layout>
   </v-container>
 </template>
+
+
+style
+
+<style lang="scss">
+  .editorConteudo {
+    border: 1px #bdbdbd solid;
+    border-radius: 3px;
+    padding: 10px 15px;
+    margin: 15px 0;
+
+    & div {
+      & .ProseMirror {
+        & p {
+          min-height: 500px;
+        } 
+      } 
+    }
+  }
+</style>
 
 <script>
 // Import the editor

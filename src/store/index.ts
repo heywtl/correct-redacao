@@ -6,6 +6,7 @@ import shared from './shared'
 import user from './user'
 import profile from './profile'
 import essays from './essays'
+import blog from './blog'
 
 
 Vue.use(Vuex)
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     shared,
     user,
     profile,
-    essays
+    essays,
+    blog
   }
 })
