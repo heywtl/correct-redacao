@@ -7,67 +7,65 @@
             <v-toolbar-title>Corrigir Redação</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form ref="form" v-model="valid">
-              <v-layout align-center justify-center>
-                <v-flex xs10 sm10 md10>
-                  <editor-menu-bar
-                    :editor="editor"
-                    v-slot="{ commands, isActive }"
-                  >
-                    <div>
-                      <button
-                        :class="{ 'is-active': isActive.bold() }"
-                        @click="commands.bold"
-                      >
-                        <v-icon>mdi-format-bold</v-icon>
-                      </button>
-                      <button
-                        :class="{ 'is-active': isActive.italic() }"
-                        @click="commands.italic"
-                      >
-                        <v-icon>mdi-format-italic</v-icon>
-                      </button>
+            <v-layout align-center justify-center>
+              <v-flex xs10 sm10 md10>
+                <editor-menu-bar
+                  :editor="editor"
+                  v-slot="{ commands, isActive }"
+                >
+                  <div>
+                    <button
+                      :class="{ 'is-active': isActive.bold() }"
+                      @click="commands.bold"
+                    >
+                      <v-icon>mdi-format-bold</v-icon>
+                    </button>
+                    <button
+                      :class="{ 'is-active': isActive.italic() }"
+                      @click="commands.italic"
+                    >
+                      <v-icon>mdi-format-italic</v-icon>
+                    </button>
 
-                      <button
-                        :class="{ 'is-active': isActive.strike() }"
-                        @click="commands.strike"
-                      >
-                        <v-icon>mdi-format-strike</v-icon>
-                      </button>
+                    <button
+                      :class="{ 'is-active': isActive.strike() }"
+                      @click="commands.strike"
+                    >
+                      <v-icon>mdi-format-strike</v-icon>
+                    </button>
 
-                      <button
-                        :class="{ 'is-active': isActive.underline() }"
-                        @click="commands.underline"
-                      >
-                        <v-icon>mdi-format-underline</v-icon>
-                      </button>
+                    <button
+                      :class="{ 'is-active': isActive.underline() }"
+                      @click="commands.underline"
+                    >
+                      <v-icon>mdi-format-underline</v-icon>
+                    </button>
 
-                      <button
-                        :class="{ 'is-active': isActive.code_block() }"
-                        @click="commands.code_block"
-                      >
-                        <v-icon>mdi-comment-quote-outline</v-icon>
-                      </button>
+                    <button
+                      :class="{ 'is-active': isActive.code_block() }"
+                      @click="commands.code_block"
+                    >
+                      <v-icon>mdi-comment-quote-outline</v-icon>
+                    </button>
 
-                      <button @click="commands.horizontal_rule">
-                        <v-icon>mdi-minus</v-icon>
-                      </button>
+                    <button @click="commands.horizontal_rule">
+                      <v-icon>mdi-minus</v-icon>
+                    </button>
 
-                      <button @click="commands.undo">
-                        <v-icon>mdi-undo</v-icon>
-                      </button>
+                    <button @click="commands.undo">
+                      <v-icon>mdi-undo</v-icon>
+                    </button>
 
-                      <button @click="commands.redo">
-                        <v-icon>mdi-redo</v-icon>
-                      </button>
-                    </div>
-                  </editor-menu-bar>
-                  <v-col align-self="center"
-                    ><editor-content :editor="editor"
-                  /></v-col>
-                </v-flex>
-              </v-layout>
-            </v-form>
+                    <button @click="commands.redo">
+                      <v-icon>mdi-redo</v-icon>
+                    </button>
+                  </div>
+                </editor-menu-bar>
+                <v-col align-self="center"
+                  ><editor-content :editor="editor"
+                /></v-col>
+              </v-flex>
+            </v-layout>
           </v-card-text>
         </v-card>
       </v-flex>
