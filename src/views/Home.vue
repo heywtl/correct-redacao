@@ -84,7 +84,6 @@
               :type="type"
               @click:event="showEvent"
               @click:more="viewDay"
-              @click:date="viewDay"
             ></v-calendar>
             <v-menu
               v-model="selectedOpen"
@@ -116,20 +115,20 @@
             <template v-for="(post, index) in posts">
               <v-list-item :key="'redação: ' + index">
                 <v-list-item-content>
-                  <v-list-item-title v-text="redacao.titulo"></v-list-item-title>
+                  <v-list-item-title v-text="posts.titulo"></v-list-item-title>
                   <v-list-item-subtitle
-                    v-text="redacao.tema"
+                    v-text="posts.tema"
                   ></v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-action>
                   <v-list-item-action-text>
                     {{
-                      redacao.corrigido ? redacao.dataCorrecao : redacao.dataEnvio
+                      posts.corrigido ? posts.dataCorrecao : posts.dataEnvio
                     }}
                   </v-list-item-action-text>
 
-                  <v-icon v-if="redacao.corrigido" color="green">
+                  <v-icon v-if="posts.corrigido" color="green">
                     mdi-check
                   </v-icon>
                 </v-list-item-action>
@@ -167,7 +166,92 @@ export default {
       selectedEvent: {},
       selectedElement: null,
       selectedOpen: false,
-      events: [],
+      events: [
+        {
+          name: 'Enem 2020',
+          start: '2021-01-17',
+          color: 'blue',
+          details: 'Primeiro dia'
+        },
+        {
+          name: 'Enem 2020',
+          start: '2021-01-24',
+          color: 'blue',
+          details: 'Segundo dia'
+        },
+        {
+          name: 'Enem 2020 - Digital',
+          start: '2021-01-31',
+          color: 'indigo',
+          details: 'Primeiro dia'
+        },
+        {
+          name: 'Enem 2020 - Digital',
+          start: '2021-02-07',
+          color: 'indigo',
+          details: 'Segundo dia'
+        },
+        {
+          name: 'Unesp',
+          start: '2021-01-30',
+          color: 'deep-purple',
+          details: 'Primeira fase - Primeiro dia'
+        },
+        {
+          name: 'Unesp',
+          start: '2021-01-31',
+          color: 'deep-purple',
+          details: 'Primeira fase - Segundo dia'
+        },
+        {
+          name: 'Unesp',
+          start: '2021-02-28',
+          color: 'deep-purple',
+          details: 'Segunda fase'
+        },
+        {
+          name: 'Unicamp',
+          start: '2021-01-06',
+          color: 'cyan',
+          details: 'Primeira fase - Primeiro dia'
+        },
+        {
+          name: 'Unicamp',
+          start: '2021-01-07',
+          color: 'cyan',
+          details: 'Primeira fase - Segundo dia'
+        },
+        {
+          name: 'Unicamp',
+          start: '2021-02-07',
+          color: 'cyan',
+          details: 'Segunda fase - Primeiro dia'
+        },
+        {
+          name: 'Unicamp',
+          start: '2021-02-08',
+          color: 'cyan',
+          details: 'Segunda fase - Segundo dia'
+        },
+        {
+          name: 'Fuvest',
+          start: '2021-01-10',
+          color: 'green',
+          details: 'Primeira fase'
+        },
+        {
+          name: 'Fuvest',
+          start: '2021-02-21',
+          color: 'green',
+          details: 'Segunda fase - Primeiro dia'
+        },
+        {
+          name: 'Fuvest',
+          start: '2021-02-22',
+          color: 'green',
+          details: 'Segunda fase - Segundo dia'
+        },
+      ],
     }
   },
   mounted () {
