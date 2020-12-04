@@ -87,7 +87,11 @@ style
       & .ProseMirror {
         & p {
           min-height: 500px;
-        } 
+        }
+
+        &-focused {
+          outline: none !important;
+        }
       } 
     }
   }

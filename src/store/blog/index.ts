@@ -6,12 +6,11 @@ export default {
     },
     mutations: {
         setBlogPost(state: any, posts: any) {
-            debugger
             state.posts = posts
         },
     },
     actions: {
-        fetchBlogPosts({ commit, rootGetters }: any) {
+        fetchBlogPosts({ commit }: any) {
             firebase.db.collection('Blog')
                 .get().then((post) => {
                     let list = post.docs.map((pos) => {

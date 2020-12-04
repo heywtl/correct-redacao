@@ -28,11 +28,13 @@
     <v-container>
       <v-row>
         <v-col style="text-align: center;" cols="12"><h1>Quem somos</h1></v-col>
+        <v-divider></v-divider>
+        <v-col cols="10" offset="1">Bem vindo ao Correct! Esta ferramenta tem o objetivo de incentivar a prática de redações, inicialmente do modelo ENEM, oferecendo um site aos vestibulandos que facilite o acesso a correções de qualidade por professores capacitados bem como correções rápidas e confiáveis da nossa inteligência artifical que irá evoluir juntamente com os alunos!</v-col>
       </v-row>
       <v-row class="blog">
         <v-col 
           class="calendario"
-          align-self="cemter" cols="6">
+          cols="6">
           <v-sheet height="64">
             <v-toolbar
               flat
@@ -73,7 +75,7 @@
               <v-spacer></v-spacer>
             </v-toolbar>
           </v-sheet>
-          <v-sheet height="600">
+          <v-sheet height="450">
             <v-calendar
               locale="pt-br"
               ref="calendar"
@@ -110,28 +112,16 @@
             </v-menu>
           </v-sheet>
         </v-col>
-        <v-col style="text-align: center;"  align-self="center" cols="6">
+        <v-col style="text-align: center;" cols="6">
           <v-list three-line>
-            <template v-for="(post, index) in posts">
-              <v-list-item :key="'redação: ' + index">
+            <template v-for="(post, index) in getBlogPosts">
+              <v-list-item :key="'post: ' + index">
                 <v-list-item-content>
-                  <v-list-item-title v-text="posts.titulo"></v-list-item-title>
+                  <v-list-item-title v-text="post.title"></v-list-item-title>
                   <v-list-item-subtitle
-                    v-text="posts.tema"
+                    v-text="post.text"
                   ></v-list-item-subtitle>
                 </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-list-item-action-text>
-                    {{
-                      posts.corrigido ? posts.dataCorrecao : posts.dataEnvio
-                    }}
-                  </v-list-item-action-text>
-
-                  <v-icon v-if="posts.corrigido" color="green">
-                    mdi-check
-                  </v-icon>
-                </v-list-item-action>
               </v-list-item>
               <v-divider :key="'divider: ' + index"></v-divider>
             </template>
@@ -146,7 +136,7 @@
 </style>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -263,6 +253,9 @@ export default {
     ]),
   },
   methods: {
+    ...mapActions([
+      'fetchBlogPosts'
+    ]),
     viewDay ({ date }) {
       this.focus = date
       this.type = 'day'
@@ -296,17 +289,12 @@ export default {
       }
 
       nativeEvent.stopPropagation()
-    },
-    blogPosts() {
-      debugger
-      return this.getBlogPosts
     }
   },
   components: {
   },
-  mounted() {
-    debugger
-    this.posts = this.getBlogPosts
+  beforeMount() {
+    this.fetchBlogPosts()
   }
 }
 </script>

@@ -79,7 +79,7 @@ export default {
             ]
         else if (!this.isStudent)
           return [
-            { route: 'Perfil', icon: 'mdi-face-profile', name: 'Perfil'},
+            { route: 'Perfil', icon: 'mdi-face-profile', name: 'Perfil'}
           ]
         else
           return [

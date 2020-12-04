@@ -49,7 +49,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/corrigir',
-    name: 'Correção',
+    name: 'Correcao',
     component: Correcao
   }
 ]

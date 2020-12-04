@@ -3,42 +3,49 @@ import router from '../../router'
 
 export default {
     state: {
-        userEssays: null,
-        essay: null
+        essayList: null,
     },
     mutations: {
-        setUserEssays(state: any, profile: any) {
-            state.profile = profile
-        },
-        setEssay(state: any) {
-            state.profile = null
+        setEssayList(state: any) {
+            state.essayList = null
         }
     },
     actions: {
         postEssay({ commit, rootGetters }: any, payload: any){
             var user = rootGetters.getUser
-            firebase.db.collection('Users').doc(user.email).collection('Essays').add(payload)
-            .catch((e) => { console.log(e) })
-            .finally(() => {
-              router.push({ name: 'Home' })
-            })
-        },
-        fetchUserEssays({ commit, rootGetters }: any) {
-            var user = rootGetters.getUser
-            firebase.db.collection('Users').doc(user.email).collection('Essays')
-                .get().then((profile) => {
-                    let list = profile.docs.map((essay) => {
-                        return {
-                            ...essay.data()
-                        }
-                    })
-                    commit('setUserEssays', list)
+
+            let payloadEssayList = {
+                email: user.email,
+                corrected: false,
+                correctedIA: false,
+                correctedDate: null,
+                correctedIADate: null,
+                redacted: null,
+                ...payload
+            }
+
+            firebase.db.collection('EssayList')
+                .add(payloadEssayList)
+                .catch((e) => { console.log(e) })
+                .finally(() => {
+                    router.push({ name: 'Home' })
                 })
-              .catch((e: any) => { console.log(e) })
         },
-        fetchSingleEssay({ commit }: any, payload: any) {
-            let essay = firebase.db.collection('Users').doc(payload.email).collection('Essays').doc(payload.id)
-            commit('setEssay', essay)
+        fetchEssayList({ commit }: any, payload: any) {
+            firebase.db.collection('EssayList').get()
+                .then((essays) =>  {
+                    let essayList = essays.docs.map((essay) => { return { ...essay.data() } } )
+                    debugger
+                    commit('setEssayList', essayList)
+                })
+        }
+    },
+    getters: {
+        getEssays(state: any) {
+            return state.essays
         },
+        getNotCorrected(state: any) {
+            return state.essayList
+        }
     }
 }
