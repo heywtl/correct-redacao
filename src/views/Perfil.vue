@@ -147,23 +147,25 @@
       </v-col>
       <v-col cols="6">
         <v-list three-line>
-          <template v-for="(redacao, index) in getEssays">
-            <v-list-item :key="'redação: ' + index">
+          <template v-for="(redacao, index) in redacoes">
+            <v-list-item 
+              :key="'redação: ' + index"
+              :to="{ name: 'Correcao', params: { essay: redacao} }">
               <v-list-item-content>
-                <v-list-item-title v-text="redacao.title"></v-list-item-title>
+                <v-list-item-title v-text="redacao.doc.title"></v-list-item-title>
                 <v-list-item-subtitle
-                  v-text="redacao.theme"
+                  v-text="redacao.doc.theme"
                 ></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
                 <v-list-item-action-text>
                   {{
-                    redacao.corrected ? redacao.correctedDate : redacao.submitDate
+                    redacao.doc.corrected ? redacao.doc.correctedDate : redacao.doc.submitDate
                   }}
                 </v-list-item-action-text>
 
-                <v-icon v-if="redacao.corrected" color="green">
+                <v-icon v-if="redacao.doc.corrected" color="green">
                   mdi-check
                 </v-icon>
               </v-list-item-action>
@@ -201,6 +203,12 @@ export default {
   },
   beforeMount() {
     this.fetchEssayList()
+      .then(() => {
+        if (!this.isStudent)
+          this.redacoes = this.getEssays != null ? this.getEssays.filter(x => !x.doc.corrected) : []
+        else
+          this.redacoes = this.getEssays.filter(x => x.doc.email == this.getUser.email)
+      })
   },
   mounted() {
    

@@ -48,7 +48,7 @@ const routes: Array<RouteConfig> = [
     beforeEnter: AuthProfileGuard
   },
   {
-    path: '/corrigir',
+    path: '/correcao',
     name: 'Correcao',
     component: Correcao
   }
