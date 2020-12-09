@@ -207,7 +207,7 @@ export default {
         if (!this.isStudent)
           this.redacoes = this.getEssays != null ? this.getEssays.filter(x => !x.doc.corrected) : []
         else
-          this.redacoes = this.getEssays.filter(x => x.doc.email == this.getUser.email)
+          this.redacoes = this.getEssays != null ? this.getEssays.filter(x => x.doc.email == this.getUser.email) : []
       })
   },
   mounted() {
