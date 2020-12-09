@@ -175,9 +175,6 @@
         </v-list>
       </v-col>
     </v-row>
-
-
-    <v-row v-else-if="userType == 'administrador'"></v-row>
   </v-container>
 </template>
 
@@ -209,10 +206,6 @@ export default {
         else
           this.redacoes = this.getEssays.filter(x => x.doc.email == this.getUser.email)
       })
-  },
-  mounted() {
-   
-
   },
 };
 </script>

@@ -8,21 +8,17 @@
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="i"
+        :src="imgs[i].src"
       >
-        <v-sheet
-          :color="colors[i]"
-          height="100%"
-        >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
           >
-            <div class="display-3">
-              {{ slide }} Slide
-            </div>
-          </v-row>
-        </v-sheet>
+           <div class="display-3">
+            {{ slide }}
+           </div>
+        </v-row>
       </v-carousel-item>
     </v-carousel>
     <v-container>
@@ -144,13 +140,21 @@ export default {
     return {
       posts: [],
       slides: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth',
+        'Bem-vindos ao Correct!',
+        'Aprimore sua escrita conosco',
+        'Faça parte do nosso time de corretores',
       ],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+      imgs: [
+          {
+            src: 'https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=756&q=80',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+          },
+      ],
       focus: '',
       type: 'month',
       selectedEvent: {},
