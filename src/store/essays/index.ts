@@ -26,13 +26,12 @@ export default {
             }
 
             debugger
-            axios.post('http://heywtl.pythonanywhere.com/api/v1/correct', { essay: payload.essay })
+            axios.post('https://heywtl.pythonanywhere.com/api/v1/correct', { essay: payload.essay })
                 .then((response: any) => {
                     debugger
                     payloadEssayList.correctedIA = true
                     payloadEssayList.correctedIADate = new Date().toISOString()
                 }).catch(console.log)
-
 
 
             firebase.db.collection('EssayList')

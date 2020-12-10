@@ -41,27 +41,6 @@
                           required
                         >
                         </v-textarea>
-                        <v-btn
-                          :color="file != null ? 'green' : 'red'"
-                          class="text-none"
-                          rounded
-                          depressed
-                          :disabled="disableUpload"
-                          :loading="isSelecting"
-                          @click="onButtonClick"
-                        >
-                          <v-icon left>
-                            mdi-upload
-                          </v-icon>
-                          {{ file != null ? this.file.name : '...' }}
-                        </v-btn>
-                        <input
-                          ref="uploader"
-                          class="d-none"
-                          type="file"
-                          accept="application/msword, text/plain, application/pdf"
-                          @change="onFileChanged"
-                        >
                       </v-flex>
                     </v-layout>    
                   </v-form>
@@ -126,19 +105,6 @@ export default {
       }
       this.postEssay(payload)
     },
-    onButtonClick() {
-      this.isSelecting = true
-      window.addEventListener('focus', () => {
-        this.isSelecting = false
-      }, { once: true })
-
-      this.$refs.uploader.click()
-    },
-    onFileChanged(e) {
-      //TODO: Falta traduzir o arquivo pra .txt SEMPRE
-      this.file = e.target.files[0]
-      this.$refs.form.validate()
-    }
   }
 }
 </script>
