@@ -196,8 +196,6 @@ export default {
       essay.doc.corrected = true
       essay.doc.correctedDate = new Date().toISOString()
 
-      debugger
-
       essay.grades = {
         T1: Number(this.grade.domEscFor),
         T2: Number(this.grade.propIntervencao),

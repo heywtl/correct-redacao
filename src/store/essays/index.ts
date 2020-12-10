@@ -6,7 +6,7 @@ export default {
         essayList: null,
     },
     mutations: {
-        setEssayList(state: any, list: any) {
+        setEssayList(state: any, list: any) {            
             state.essayList = list
         }
     },

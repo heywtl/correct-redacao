@@ -36,7 +36,6 @@ export default {
     signInUser({ commit, dispatch }: any, payload: any) {
       firebase.auth.signInWithEmailAndPassword(payload.email, payload.password)
         .then((auth) => {
-          console.log(auth)
           let newUser = {
             id: auth.user?.uid,
             email: auth.user?.email,

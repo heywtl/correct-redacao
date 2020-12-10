@@ -84,24 +84,32 @@
       <v-col cols="6">
         <v-list three-line>
           <template v-for="(redacao, index) in redacoes">
-            <v-list-item :key="'redação: ' + index">
+            <v-list-item :key="'redação: ' + index"
+              :to="{ name: 'Redacao', params: { essay: redacao} }">
               <v-list-item-content>
-                <v-list-item-title v-text="redacao.titulo"></v-list-item-title>
+                <v-list-item-title v-text="redacao.doc.title"></v-list-item-title>
                 <v-list-item-subtitle
-                  v-text="redacao.tema"
+                  v-text="redacao.doc.theme"
                 ></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
                 <v-list-item-action-text>
                   {{
-                    redacao.corrigido ? redacao.dataCorrecao : redacao.dataEnvio
+                    redacao.doc.corrected ? redacao.doc.correctedDate : redacao.doc.submitDate
                   }}
                 </v-list-item-action-text>
 
-                <v-icon v-if="redacao.corrigido" color="green">
-                  mdi-check
-                </v-icon>
+                <v-btn v-if="redacao.doc.corrected" icon
+                    :key="'icon' + index"
+                    :to="{ name: 'Corrigido', params: { essay: redacao} }">
+                  <v-icon
+                    color="green">
+                    mdi-check
+                  </v-icon>
+                </v-btn>
+
+
               </v-list-item-action>
             </v-list-item>
             <v-divider :key="'divider: ' + index"></v-divider>
@@ -161,13 +169,9 @@
               <v-list-item-action>
                 <v-list-item-action-text>
                   {{
-                    redacao.doc.corrected ? redacao.doc.correctedDate : redacao.doc.submitDate
+                    redacao.doc.submitDate
                   }}
                 </v-list-item-action-text>
-
-                <v-icon v-if="redacao.doc.corrected" color="green">
-                  mdi-check
-                </v-icon>
               </v-list-item-action>
             </v-list-item>
             <v-divider :key="'divider: ' + index"></v-divider>
@@ -198,14 +202,16 @@ export default {
         'getEssays'
       ]),
   },
-  beforeMount() {
-    this.fetchEssayList()
-      .then(() => {
+  mounted() {
+    this.fetchEssayList().then(() => {
+      if (!this.redacoes || this.redacoes.length <1) {
         if (!this.isStudent)
           this.redacoes = this.getEssays != null ? this.getEssays.filter(x => !x.doc.corrected) : []
-        else
+        else {
           this.redacoes = this.getEssays != null ? this.getEssays.filter(x => x.doc.email == this.getUser.email) : []
-      })
+        }
+      }
+    })
   },
 };
 </script>

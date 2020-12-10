@@ -10,6 +10,8 @@ import Submeter from '../views/Submeter.vue'
 import AuthProfileGuard from './auth-profile-guard'
 import AuthGuard from './auth-guard'
 import Correcao from '../views/Correcao.vue'
+import Corrigido from '../views/Corrigido.vue'
+import Redacao from '../views/Redacao.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +53,16 @@ const routes: Array<RouteConfig> = [
     path: '/correcao',
     name: 'Correcao',
     component: Correcao
+  },
+  {
+    path: '/corrigido',
+    name: 'Corrigido',
+    component: Corrigido
+  },
+  {
+    path: '/redacao',
+    name: 'Redacao',
+    component: Redacao
   }
 ]
 
