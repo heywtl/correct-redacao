@@ -122,7 +122,7 @@ export default {
         title: this.title,
         theme: this.theme,
         essay: this.essay != '' ? this.essay : this.file,
-        submitDate: new Date().toISOString().substr(0, 16).replace("T", " ")
+        submitDate: new Date().toISOString()
       }
       this.postEssay(payload)
     },

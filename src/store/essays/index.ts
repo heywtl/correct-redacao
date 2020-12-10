@@ -1,4 +1,5 @@
 import firebase from '../../firebase/index'
+import axios from 'axios'
 import router from '../../router'
 
 export default {
@@ -23,6 +24,16 @@ export default {
                 redacted: null,
                 ...payload
             }
+
+            debugger
+            axios.post('http://heywtl.pythonanywhere.com/api/v1/correct', { essay: payload.essay })
+                .then((response: any) => {
+                    debugger
+                    payloadEssayList.correctedIA = true
+                    payloadEssayList.correctedIADate = new Date().toISOString()
+                }).catch(console.log)
+
+
 
             firebase.db.collection('EssayList')
                 .add(payloadEssayList)
